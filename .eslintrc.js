@@ -45,9 +45,6 @@ module.exports = {
     "no-else-return": [0],
     "no-restricted-syntax": [0],
     "no-new-func": 0,
-    "no-console": ["warn", {
-      "allow": ["warn", "error"]
-    }],
     "no-continue": 0,
     "no-eval": ["error", {
       "allowIndirect": true

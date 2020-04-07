@@ -22,16 +22,18 @@ export default class BaseChart extends React.Component {
       },
       // 主标题 标题 文本样式（字体 大小 颜色 粗细 倾斜） 对齐方式
       title: {
-        text: undefined, // 标题
+        text: "杭州", // 标题
         isShowTitle: true, // 是否隐藏标题
         backupsTxet: undefined, // 配置项内配置的标题
         style: {
           fontFamily: "微软雅黑", // 文本样式(字体)
-          fontSize: 16, // 文本样式(大小)
+          fontSize: "16px", // 文本样式(大小)
           color: "#272C3D", // 文本样式(颜色)
           fontWeight: "normal", // 文本样式(粗细)
           fontStyle: "normal" // 文本样式(倾斜)
         },
+        margin: 0,
+        useHTML: true,
         align: "center" // 标题位置
       },
       // 副标题 标题 文本样式（字体 大小 颜色 粗细 倾斜） 对齐方式
@@ -41,11 +43,13 @@ export default class BaseChart extends React.Component {
         backupsTxet: undefined, // 配置项内配置的副标题
         style: {
           fontFamily: "微软雅黑", // 文本样式(字体)
-          fontSize: 16, // 文本样式(大小)
+          fontSize: "16px", // 文本样式(大小)
           color: "#272C3D", // 文本样式(颜色)
           fontWeight: "normal", // 文本样式(粗细)
-          fontStyle: "normal" // 文本样式(倾斜)
+          fontStyle: "normal", // 文本样式(倾斜)
+          paddingBottom: "5px"
         },
+        useHTML: true,
         align: "center" // 标题位置
       },
       // 备注(版权信息) 是否显示 备注信息
@@ -168,7 +172,7 @@ export default class BaseChart extends React.Component {
             color: "#666666", // 轴字颜色
             writingMode: "", // 竖排文字
             display: "inline-block",
-            padding: "5px"
+            padding: "0 5px"
           },
           rotation: 0, // 旋转角度
           x: 0,
@@ -176,24 +180,33 @@ export default class BaseChart extends React.Component {
         },
         plotLines: [] // 预警线
       }],
-      series: [{
-        name: "安装，实施人员",
-        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-      }, {
-        name: "工人",
-        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-      }, {
-        name: "销售",
-        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-      }, {
-        name: "项目开发",
-        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-      }, {
-        name: "其他",
-        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-      }]
+      series: []
     };
     this.state = {};
+
+    this.dataSource = [
+      {
+        source: "AAAA_p1.a1",
+        color: "red",
+        name: "安装，实施人员"
+      },
+      {
+        source: "AAAA_p1.a2",
+        color: "yellow",
+        customType: "column",
+        name: "工人"
+      },
+      {
+        source: "AAAA_p1.a3",
+        color: "#15fd92",
+        name: "销售"
+      },
+      {
+        source: "AAAA_p1.a4",
+        color: "blue",
+        name: "项目开发"
+      }
+    ];
   }
 
   // 改变标题的值
@@ -206,7 +219,7 @@ export default class BaseChart extends React.Component {
       titleObj.backupsTxet = value;
     }
     this.currentConfig[type] = titleObj;
-    this.chart.update({ [type]: { ...titleObj } });
+    window.chart.update({ [type]: { ...titleObj } });
   }
 
   // 隐藏标题
@@ -222,6 +235,13 @@ export default class BaseChart extends React.Component {
       titleObj.text = undefined;
     }
     this.currentConfig[type] = titleObj;
-    this.chart.update({ [type]: { ...titleObj } });
+    window.chart.update({ [type]: { ...titleObj } });
+  }
+
+  updateTitleSize = (value, type = "title") => {
+    const titleObj = this.currentConfig[type];
+    titleObj.style.fontSize = `${value}px`;
+    this.currentConfig[type] = titleObj;
+    window.chart.update({ [type]: { ...titleObj } });
   }
 }
