@@ -14,6 +14,11 @@ export default class index extends BaseChart {
     super(props);
     this.state = {
     };
+    this.customConfig = {
+      extra: {
+        yAxisUnit: "" // y轴单位
+      }
+    };
     this.currentConfig = merge({}, this.initConfig, this.customConfig);
   }
 

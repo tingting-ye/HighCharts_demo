@@ -112,7 +112,9 @@ export default class BaseChart extends React.Component {
       xAxis: [{
         // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         /** x轴内容 提出 */
+        showEmpty: false, // 当坐标轴没有数据时，是否显示坐标轴（包括轴线及坐标轴标题）
         startOnTick: false, // 强制开始刻度（配合刻度）
+        endOnTick: false, // 强制结束刻度（配合刻度）
         visible: true, // 是否显示X轴
         gridLineWidth: 0, // 网格线
         min: null, // 刻度（初始值）
@@ -139,10 +141,12 @@ export default class BaseChart extends React.Component {
       }],
       yAxis: [{
         /** y轴内容 提出 */
-        startOnTick: false, // 强制开始刻度（配合刻度）
-        endOnTick: false, // 强制结束刻度（配合刻度）
+        id: "init-yAxis",
+        showEmpty: false, // 当坐标轴没有数据时，是否显示坐标轴（包括轴线及坐标轴标题）
+        startOnTick: true, // 强制开始刻度（配合刻度）
+        endOnTick: true, // 强制结束刻度（配合刻度）
         visible: true, // 是否显示X轴
-        gridLineWidth: 0, // 网格线
+        gridLineWidth: 1, // 网格线
         crosshair: false, // 准星线
         min: null, // 刻度（初始值）
         max: null, // 刻度（最大值）
@@ -162,9 +166,13 @@ export default class BaseChart extends React.Component {
         labels: { // 轴标签
           style: {
             color: "#666666", // 轴字颜色
-            writingMode: "" // 竖排文字
+            writingMode: "", // 竖排文字
+            display: "inline-block",
+            padding: "5px"
           },
-          rotation: 0 // 旋转角度
+          rotation: 0, // 旋转角度
+          x: 0,
+          useHTML: true
         },
         plotLines: [] // 预警线
       }],
