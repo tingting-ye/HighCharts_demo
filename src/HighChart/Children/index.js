@@ -9,20 +9,21 @@ export default class HelloWorld extends Component {
   }
 
   render() {
-    const { title: { isShowTitle, backupsTxet } } = this.props.currentConfig;
+    const {
+      title: { isShowTitle, text, backupsTxet, style: { fontSize } },
+      extra: { moreAxis }
+    } = this.props.currentConfig;
+    const titleFontSize = fontSize.replace(/[^0-9]/ig, "");
     return (
-      <div
-        className="leftTool"
-        // style={{ width: "300px", float: "left" }}
-      >
+      <div className="leftTool" >
         {/** 标题显影功能，隐藏可以不占空间 */}
         <p>标题</p>
-        内容：<Input style={{ width: "250px" }} value={backupsTxet} onChange={this.props.changeTitle}/><br/>
-        显影：<Checkbox defaultChecked={isShowTitle} onChange={this.props.onTitleShowChange}/><br/>
-        字体大小：<InputNumber onChange={this.props.updateTitleSize}/>
+        内容：<Input style={{ width: "250px" }} value={isShowTitle ? text : backupsTxet} onChange={(e) => this.props.changeTitle("title", e)}/><br/>
+        显影：<Checkbox checked={isShowTitle} onChange={(e) => this.props.onTitleShowChange("title", e)}/><br/>
+        字体大小：<InputNumber value={titleFontSize} step={1} precision={0} onChange={(e) => this.props.updateTitleSize("title", e)}/>
         <hr/>
-        <Button onClick={this.props.clearAxis}>删除a1</Button>
-        <Button onClick={this.props.addAxis}>新增o1</Button>
+        单/多轴切换：<Checkbox checked={moreAxis} onChange={this.props.cutChartAxis}/><br/>
+        更新对象：<Button size={"small"} onClick={this.props.updateSource}>+</Button>
       </div>
     );
   }
