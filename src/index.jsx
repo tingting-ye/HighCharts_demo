@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import LineChart from "./HighChart/LineChart/index";
+import HighChartContainer from "./HighChart/index.jsx";
 
 ReactDOM.render(
-  <LineChart/>,
+  <HighChartContainer/>,
   document.getElementById("app")
 );
